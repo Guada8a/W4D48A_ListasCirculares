@@ -69,6 +69,7 @@ export default class Ruta{
     recorrido(inicio,horaInicio,horaFin) {
         let aux = this.buscar(inicio);
         let minutos = 0;
+        let bases = [];
         minutos = horaInicio.getMinutes() == 0 ? `00` : horaInicio.getMinutes();
         console.log(`RUTA ${this.numero}:`);
         let str = `"${aux.nombre}" -> ${horaInicio.getHours()}:${minutos}\n`;
@@ -76,8 +77,16 @@ export default class Ruta{
             horaInicio.setMinutes(horaInicio.getMinutes() + aux.sig.minutos);
             aux = aux.sig;
             minutos = horaInicio.getMinutes() == 0 ? `00` : horaInicio.getMinutes();
-            str += `"${aux.nombre}" -> ${horaInicio.getHours()}:${minutos}\n`;
+            str += `BASE: "${aux.nombre}" -> ${horaInicio.getHours()}:${minutos}\n`;
         }
+        /*bases.push({BASE: aux.nombre, HORA: `${horaInicio.getHours()}:${minutos}`});
+        while (horaInicio.getHours() < horaFin.getHours() || horaInicio.getMinutes() < horaFin.getMinutes()) {
+            horaInicio.setMinutes(horaInicio.getMinutes() + aux.sig.minutos);
+            aux = aux.sig;
+            minutos = horaInicio.getMinutes() == 0 ? `00` : horaInicio.getMinutes();
+            bases.push({ BASE: aux.nombre, HORA: `${horaInicio.getHours()}:${minutos}` });
+        }
+        return bases;*/
         return str;
     }
 }
