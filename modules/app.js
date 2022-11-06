@@ -2,18 +2,69 @@ import Ruta from "./ruta.js";
 import Base from "./base.js";
 
 let ruta = new Ruta(22);
-
+let checkbox = document.querySelector('#posicion');
+checkbox.addEventListener('change', () => {
+    if (checkbox.checked)
+        document.querySelector('#campo_posicion').style.display = 'block';
+    else
+        document.querySelector('#campo_posicion').style.display = 'none';
+});
 document.querySelector("#agregarBase").addEventListener("click", () => {
     let nombre = document.getElementById("name_base").value;
     let minutos = parseInt(document.getElementById("mins").value);
-    ruta.agregar(new Base(nombre, minutos));
-    
+    let posicion = parseInt(document.getElementById("posicion").value);
+    let base = new Base(nombre, minutos);
+    if (nombre != "" && minutos != "") { 
+        if(!posicion) {
+            if (ruta.inicio == null) {
+                ruta.agregar(base);
+                document.getElementById("listadoBases").innerHTML = basesNuevas();
+            } else {
+                let aux = new Base(nombre, minutos);
+                if (ruta.buscar(aux.nombre) != null) {
+                    if (ruta.buscar(aux.nombre).nombre != aux.nombre) {
+                        ruta.agregar(base, aux);
+                        base = aux;
+                        document.getElementById("listadoBases").innerHTML = basesNuevas();
+                    } else {
+                        alert("La base ya existe");
+                    }
+                } else {
+                    ruta.agregar(aux);
+                    base = aux;
+                    document.getElementById("listadoBases").innerHTML = basesNuevas();
+                }
+            }
+        } else {
+            if (posicion != '') {
+                var aux = new Base(nombre, minutos);
+                if (ruta.buscar(aux.nombre) != null) {
+                    if (ruta.buscar(aux.nombre).nombre != aux.nombre) {
+                        ruta.cambiarPosicion(base, posicion);
+                        base = aux;
+                        document.getElementById("listadoBases").innerHTML = basesNuevas();
+                    } else {
+                        alert("La base ya existe");
+                    }
+                } else {
+                    let elemento = ruta.cambiarPosicion(aux, posicion);
+                    base = aux;
+                    document.getElementById("listadoBases").innerHTML = basesNuevas();
+                    if (!elemento)
+                        alert("La posición no existe");
+                }
+            } else {
+                alert("Ingrese una posición");
+            }
+        }
+    } else {
+        alert("Ingrese todos los campos");
+    }
     document.getElementById("name_base").value = "";
     document.getElementById("mins").value = "";
+    checkbox.checked = false;
+    document.querySelector('#campo_posicion').style.display = 'none';
     document.getElementById("name_base").focus();
-    
-    
-    document.getElementById("listadoBases").innerHTML = basesNuevas();
 });
 function basesNuevas() {
     if (ruta.inicio != null) {
@@ -21,7 +72,7 @@ function basesNuevas() {
         let str = '';
 
         basesNuevas.forEach((base) => {
-            str += `<tr><td>${base.BASE}</td><td>${base.MINUTOS}</td></tr>`;
+            str += `<tr><td>${base.BASE}</td><td>${base.MINUTOS} mins</td></tr>`;
         });
         return str;
     } else {
@@ -33,9 +84,10 @@ document.querySelector("#buscar").addEventListener("click", () => {
     let base = ruta.buscar(nombre);
     if (base) {
         document.getElementById("nombre_base").innerHTML = base.nombre;
-        document.getElementById("duracion_base").innerHTML = base.minutos;
+        document.getElementById("duracion_base").innerHTML = base.minutos + " mins";
     } else {
         document.getElementById("nombre_base").innerHTML = "Base no encontrada";
+        document.getElementById("duracion_base").innerHTML = "";
     }
 });
 document.querySelector("#eliminar").addEventListener("click", () => {

@@ -1,3 +1,4 @@
+import Base from "./base.js";
 export default class Ruta{
     constructor(numero) {
         this.inicio = null;
@@ -17,8 +18,8 @@ export default class Ruta{
             aux.sig.ant = aux;
             aux.sig.sig = this.inicio;
             this.inicio.ant = base;
-
         }
+        return base;
     }
     buscar(nombre) {
         let aux = this.inicio;
@@ -50,6 +51,37 @@ export default class Ruta{
             } else {
                 console.log("Base no encontrada");
             }
+        }
+    }
+    agregarInicio(base) {
+        if (this.inicio == null) {
+            this.inicio = base;
+            this.inicio.sig = this.inicio;
+            this.inicio.ant = this.inicio;
+        } else {
+            base.sig = this.inicio;
+            base.ant = this.inicio.ant;
+            this.inicio.ant.sig = base;
+            this.inicio.ant = base;
+            this.inicio = base;
+        }
+    }
+    cambiarPosicion(base, posicion) {
+        let aux = this.inicio;
+        if (aux) {
+            try {
+                if (posicion == 1) {
+                    this.agregarInicio(base);
+                } else {
+                    for (let i = 1; i < posicion - 1; i++) {
+                        aux = aux.sig;
+                    }
+                    base.sig = aux.sig;
+                    base.ant = aux;
+                    aux.sig.ant = base;
+                    aux.sig = base;
+                }
+            } catch (e) { }
         }
     }
     imprimir() {
