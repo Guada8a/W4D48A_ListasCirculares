@@ -2,7 +2,7 @@ import Base from "./base.js";
 import Ruta from "./ruta.js";
 
 let ruta = new Ruta(22);
-
+console.log(ruta.numero);
 ruta.agregar(new Base("Deportes", 12));
 ruta.agregar(new Base("Sams", 12));
 ruta.agregar(new Base("Comercial Mexicana", 12));
@@ -15,3 +15,5 @@ console.log(ruta.buscar("Deportes"));
 console.table(ruta.recorrido("Central Rojos", 6, 0, 21, 20));
 ruta.eliminar("Deportes");
 console.table(ruta.recorrido("Central Rojos", 6, 0, 21, 20));
+
+

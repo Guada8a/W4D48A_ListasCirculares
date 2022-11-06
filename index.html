@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/bootstrap (1).css">
+    <link rel="stylesheet" href="/styles/bootstrap (1).min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar navbar-expand-lg bg-success text-white">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand text-white">Control de Rutas de Transporte</a>
+        </div>
+        
+    </div>
+    <div class="container">
+        <div class="bs-docs-section">
+            <div class="row">
+                <div class="col-sm-3">
+                    <p class="bs-component">
+                        <form>
+                            <fieldset class="card bg-light mb-3" style="max-width: 20rem">
+                                <legend class="card-header"><h4>Agregar Nueva Base</h4></legend>
+                                <div class="form-group card-body">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name_base" placeholder="Nombre de la base">
+                                        <label for="name_base">Nombre de la Base</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="mins" placeholder="Minutos de Duración" maxlength="3" required max="60">
+                                        <label for="mins">Duración (en minutos)</label>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-dark" id="agregarBase" style="width:100%; text-align:center">Agregar</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <p class="bs-component">
+                        <form>
+                            <fieldset class="card bg-light mb-3" style="max-width: 20rem">
+                                <legend class="card-header">
+                                    <h4>Buscar Base</h4>
+                                </legend>
+                                <div class="form-group card-body">
+                                    <div class="form-floating mb-3">
+                                        <input type="search" class="form-control" id="searchBase" placeholder="Buscar Base">
+                                        <label for="searchBase">Buscar</label>
+                                    </div>
+                                    <button type="button" id="buscar" class="btn btn-outline-dark" style="width:100%; text-align:center">Buscar</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </p>
+                    <p class="bs-component">
+                        <form>
+                            <fieldset class="card bg-light mb-3" style="max-width: 20rem">
+                                <legend class="card-header">
+                                    <h4>Eliminar Base</h4>
+                                </legend>
+                                <div class="form-group card-body">
+                                    <div class="form-floating mb-3">
+                                        <input type="search" class="form-control" id="eliminaInput" placeholder="Buscar Base">
+                                        <label for="eliminaInput">Eliminar</label>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-outline-dark" style="width:100%; text-align:center">Eliminar</button>
+                            </fieldset>
+                        </form>
+                    </p>
+                </div>
+                
+                <div class="col-sm-6">
+                    <p class="bs-component">
+                        <form>
+                            <fieldset class="card bg-light mb-3">
+                                <legend class="card-header">
+                                    <h4>Info. Base</h4>
+                                </legend>
+                                <div class="form-group card-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Duración</th>
+                                            </tr>
+                                            <tr>
+                                                <td id="nombre_base"></td>
+                                                <td id="duracion_base"></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </p>
+                    <p class="bs-component">
+                        <form>
+                            <fieldset>
+                                <legend>
+                                    <h3>Recorrido</h3>
+                                </legend>
+                                <div class="form-group">
+                                    Incio: <input type="time" id="h_inicio" name="appt" min="00:00" max="24:00" required>
+                                    Fin: <input type="time" id="h_fin" name="appt" min="00:00" max="24:00" required>
+                                    <table class="table table-hover" id="recorrido">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Base</th>
+                                                <th scope="col">Hora</th>
+                                            </tr>
+                                            <tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
