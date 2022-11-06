@@ -26,11 +26,7 @@ export default class Ruta{
             while (aux.nombre != nombre && aux.sig != this.inicio) {
                 aux = aux.sig;
             }
-            if(aux.nombre == nombre){
-                return aux;
-            } else {
-                console.log("No se encontró la base");
-            }
+            return aux.nombre == nombre ? aux : false;
         }
     }
     eliminar(nombre) {
@@ -39,7 +35,7 @@ export default class Ruta{
         if (this.inicio.nombre === nombre && this.inicio.sig === this.inicio) {
             this.inicio = null;
         } else if (this.inicio.nombre == nombre) {
-            this.inicio.sig.minutos = this.inicio.minutos + this.inicio.sig.minutos;
+            this.inicio.sig.minutos = parseInt(this.inicio.minutos) + parseInt(this.inicio.sig.minutos);
             this.inicio.sig.ant = this.inicio.ant;
             this.inicio.ant.sig = this.inicio.sig;
             this.inicio = this.inicio.sig;
@@ -48,7 +44,7 @@ export default class Ruta{
                 aux = aux.sig;
             }
             if (aux.sig.nombre === nombre) {
-                aux.sig.sig.minutos = aux.sig.minutos + aux.sig.sig.minutos;
+                aux.sig.sig.minutos = parseInt(aux.sig.minutos) + parseInt(aux.sig.sig.minutos);
                 aux.sig = aux.sig.sig;
                 aux.sig.ant = aux;
             } else {

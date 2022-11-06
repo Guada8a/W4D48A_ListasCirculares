@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/bootstrap (1).css">
-    <link rel="stylesheet" href="/styles/bootstrap (1).min.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/styles/bootstrap.css">
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <title>CONTROL DE RUTAS</title>
+    <script type="module" src="/modules/app.js"></script>
+
 </head>
 <body>
     <div class="navbar navbar-expand-lg bg-success text-white">
@@ -66,8 +68,9 @@
                                         <input type="search" class="form-control" id="eliminaInput" placeholder="Buscar Base">
                                         <label for="eliminaInput">Eliminar</label>
                                     </div>
+                                    <small id="errorEliminar" class="form-text text-muted" style="display:none">Base No Encontrada!</small>
                                 </div>
-                                <button type="button" class="btn btn-outline-dark" style="width:100%; text-align:center">Eliminar</button>
+                                <button type="button" id="eliminar" class="btn btn-outline-dark" style="width:100%; text-align:center">Eliminar</button>
                             </fieldset>
                         </form>
                     </p>
