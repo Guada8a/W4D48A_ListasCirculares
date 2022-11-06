@@ -107,20 +107,19 @@
                                     <h3>Recorrido</h3>
                                 </legend>
                                 <div class="form-group">
-                                    Incio: <input type="time" id="h_inicio" name="appt" min="00:00" max="24:00" required>
-                                    Fin: <input type="time" id="h_fin" name="appt" min="00:00" max="24:00" required>
-                                    <table class="table table-hover" id="recorrido">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Base</th>
-                                                <th scope="col">Hora</th>
-                                            </tr>
-                                            <tr>
-                                        </thead>
-                                    </table>
+                                    <label for="baseInicial" class="form-label mt-4">Base Inicial:</label>
+                                    <input type="text" class="form-control" id="baseInicial" placeholder="Nombre de la base">
+                                    <label for="h_inicio" class="form-label mt-4">Inicio:</label>
+                                    <input type="time" id="h_inicio" name="appt" min="00:00" max="24:00" required>
+                                    <label for="h_fin" class="form-label mt-4">Fin:</label>
+                                    <input type="time" id="h_final" name="appt" min="00:00" max="24:00" required>
+                                    <button class="btn btn-outline-dark" type="button" id="iniciar">Iniciar</button>
+                                    <button class="btn btn-outline-danger" type="button" id="limpiar">Limpiar</button>
                                 </div>
                             </fieldset>
                         </form>
+                        <table class="table table-hover" id="recorrido">
+                        </table>
                     </p>
                 </div>
             </div>
