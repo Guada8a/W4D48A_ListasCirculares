@@ -59,35 +59,48 @@ export default class Ruta{
     imprimir() {
         let str = `RUTA ${this.numero}: \n`;
         let aux = this.inicio;
-        str += aux.nombre + ' -> ';
+        let base = [];
+        base.push({ BASE: aux.nombre, MINUTOS: aux.minutos });
         while (aux.sig != this.inicio) {
-            str += aux.sig.nombre + ' -> ';
+            base.push({ BASE: aux.sig.nombre, MINUTOS: aux.sig.minutos });
             aux = aux.sig;
         }
-        return str;
+        return base;
     }
-    recorrido(inicio,horaInicio,horaFin) {
+    recorrido(inicio,horaInicio,minutosInicio,horaFin,minutosFin) {
         let aux = this.buscar(inicio);
         let minutos = 0;
         let bases = [];
-        minutos = horaInicio.getMinutes() == 0 ? `00` : horaInicio.getMinutes();
+        let entrada = new Date();
+        let salida = new Date();
+
+        entrada.setHours(horaInicio, minutosInicio, 0);
+        salida.setHours(horaFin, minutosFin, 0);
+
+        minutos = entrada.getMinutes() == 0 ? `00` : entrada.getMinutes();
         console.log(`RUTA ${this.numero}:`);
-        let str = `"${aux.nombre}" -> ${horaInicio.getHours()}:${minutos}\n`;
-        while (horaInicio.getHours() < horaFin.getHours() || horaInicio.getMinutes() < horaFin.getMinutes()) {
-            horaInicio.setMinutes(horaInicio.getMinutes() + aux.sig.minutos);
+        /**
+         * ? Se crea un arreglo de objetos con la información de las bases y las horas en las que pasan
+         */
+        bases.push({ BASE: aux.nombre, HORA: `${entrada.getHours()}:${minutos}` });
+        while (entrada.getHours() < salida.getHours() || entrada.getMinutes() < salida.getMinutes()) {
+            entrada.setMinutes(entrada.getMinutes() + aux.sig.minutos);
             aux = aux.sig;
-            minutos = horaInicio.getMinutes() == 0 ? `00` : horaInicio.getMinutes();
-            str += `BASE: "${aux.nombre}" -> ${horaInicio.getHours()}:${minutos}\n`;
+            minutos = entrada.getMinutes() == 0 ? `00` : entrada.getMinutes();
+            bases.push({ BASE: aux.nombre, HORA: `${entrada.getHours()}:${minutos}` });
         }
-        /*bases.push({BASE: aux.nombre, HORA: `${horaInicio.getHours()}:${minutos}`});
-        while (horaInicio.getHours() < horaFin.getHours() || horaInicio.getMinutes() < horaFin.getMinutes()) {
-            horaInicio.setMinutes(horaInicio.getMinutes() + aux.sig.minutos);
+        return bases;
+        /*
+        let str = `"${aux.nombre}" -> ${entrada.getHours()}:${minutos}\n`;
+        while (entrada.getHours() < salida.getHours() || entrada.getMinutes() < salida.getMinutes()) {
+            entrada.setMinutes(entrada.getMinutes() + aux.sig.minutos);
             aux = aux.sig;
-            minutos = horaInicio.getMinutes() == 0 ? `00` : horaInicio.getMinutes();
-            bases.push({ BASE: aux.nombre, HORA: `${horaInicio.getHours()}:${minutos}` });
+            minutos = entrada.getMinutes() == 0 ? `00` : entrada.getMinutes();
+            str += `BASE: "${aux.nombre}" -> ${entrada.getHours()}:${minutos}\n`;
         }
-        return bases;*/
         return str;
+        */
+        
     }
 }
 
