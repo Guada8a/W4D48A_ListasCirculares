@@ -12,14 +12,22 @@ document.querySelector("#agregarBase").addEventListener("click", () => {
     document.getElementById("mins").value = "";
     document.getElementById("name_base").focus();
     
-    let basesNuevas = ruta.imprimir();
-    let str = '';
-
-    basesNuevas.forEach((base) => {
-        str += `<tr><td>${base.BASE}</td><td>${base.MINUTOS}</td></tr>`;
-    });
-    document.getElementById("listadoBases").innerHTML = str;
+    
+    document.getElementById("listadoBases").innerHTML = basesNuevas();
 });
+function basesNuevas() {
+    if (ruta.inicio != null) {
+        let basesNuevas = ruta.imprimir();
+        let str = '';
+
+        basesNuevas.forEach((base) => {
+            str += `<tr><td>${base.BASE}</td><td>${base.MINUTOS}</td></tr>`;
+        });
+        return str;
+    } else {
+        return '';
+    }
+}
 document.querySelector("#buscar").addEventListener("click", () => {
     let nombre = document.getElementById("searchBase").value;
     let base = ruta.buscar(nombre);
@@ -37,7 +45,7 @@ document.querySelector("#eliminar").addEventListener("click", () => {
         ruta.eliminar(nombre);
         document.getElementById("eliminaInput").value = "";
         document.getElementById("eliminaInput").focus();
-        console.table(ruta.imprimir());
+        document.getElementById("listadoBases").innerHTML = basesNuevas();
     } else {
         document.getElementById("errorEliminar").style.display = 'block';
     }
