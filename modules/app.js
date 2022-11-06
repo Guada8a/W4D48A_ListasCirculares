@@ -7,10 +7,18 @@ document.querySelector("#agregarBase").addEventListener("click", () => {
     let nombre = document.getElementById("name_base").value;
     let minutos = parseInt(document.getElementById("mins").value);
     ruta.agregar(new Base(nombre, minutos));
+    
     document.getElementById("name_base").value = "";
     document.getElementById("mins").value = "";
     document.getElementById("name_base").focus();
-    console.table(ruta.imprimir());
+    
+    let basesNuevas = ruta.imprimir();
+    let str = '';
+
+    basesNuevas.forEach((base) => {
+        str += `<tr><td>${base.BASE}</td><td>${base.MINUTOS}</td></tr>`;
+    });
+    document.getElementById("listadoBases").innerHTML = str;
 });
 document.querySelector("#buscar").addEventListener("click", () => {
     let nombre = document.getElementById("searchBase").value;

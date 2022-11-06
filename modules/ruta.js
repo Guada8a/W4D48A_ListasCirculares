@@ -44,7 +44,7 @@ export default class Ruta{
                 aux = aux.sig;
             }
             if (aux.sig.nombre === nombre) {
-                aux.sig.sig.minutos = aux.sig.minutosaux.sig.sig.minutos;
+                aux.sig.sig.minutos = aux.sig.minutos + aux.sig.sig.minutos;
                 aux.sig = aux.sig.sig;
                 aux.sig.ant = aux;
             } else {
@@ -65,7 +65,6 @@ export default class Ruta{
     }
     recorrido(inicio, horaInicio, minutosInicio, horaFin, minutosFin) {
         let aux = inicio;
-        console.log(aux);
         let minutes = 0;
         let bases = [];
         let entrada = new Date();
@@ -74,19 +73,16 @@ export default class Ruta{
         entrada.setHours(horaInicio, minutosInicio, 0);
         salida.setHours(horaFin, minutosFin, 0);
 
-        minutes = entrada.getMinutes() == 0 ? `00` : entrada.getMinutes();
-        console.log(minutes);
-        console.log(`RUTA ${this.numero}:`);
+        minutes = entrada.getMinutes() < 10 ? `0` + entrada.getMinutes() : entrada.getMinutes();
         /*
          * ? Se crea un arreglo de objetos con la información de las bases y las horas en las que pasan
             */
-        bases.push({ BASE: aux.nombre, HORA: `${entrada.getHours()}:${minutes}` });
         while (entrada.getHours() < salida.getHours() || entrada.getMinutes() < salida.getMinutes()) {
             console.log(aux.sig.minutos);
             entrada.setMinutes(entrada.getMinutes() + aux.sig.minutos);
-            aux = aux.sig;
-            minutes = entrada.getMinutes() == 0 ? `00` : entrada.getMinutes();
             bases.push({ BASE: aux.nombre, HORA: `${entrada.getHours()}:${minutes}` });
+            aux = aux.sig;
+            minutes = entrada.getMinutes() < 10 ? `0` + entrada.getMinutes() : entrada.getMinutes();
         }
         return bases;
         /*
