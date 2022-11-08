@@ -85,7 +85,6 @@ export default class Ruta{
         }
     }
     imprimir() {
-        let str = `RUTA ${this.numero}: \n`;
         let aux = this.inicio;
         let base = [];
         base.push({ BASE: aux.nombre, MINUTOS: aux.minutos });
